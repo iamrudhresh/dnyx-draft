@@ -1,0 +1,31 @@
+{
+  "name": "dnyx-draft-monorepo",
+  "version": "4.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev --filter=web",
+    "dev:landing": "turbo dev --filter=landing",
+    "dev:all": "turbo dev",
+    "build": "turbo build --filter=web",
+    "build:landing": "turbo build --filter=landing",
+    "build:all": "turbo build",
+    "start": "pnpm --filter web start",
+    "lint": "turbo lint",
+    "check": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "bench": "vitest bench --reporter=verbose",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.10",
+    "@playwright/test": "^1.49.0",
+    "cross-env": "^10.1.0",
+    "turbo": "^2.10.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "packageManager": "pnpm@10.7.0"
+}

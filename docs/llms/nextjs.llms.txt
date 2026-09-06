@@ -1,0 +1,6 @@
+# Next.js 16 App Router Standards
+- Use `app/` directory with `layout.tsx`, `page.tsx`, `loading.tsx`, `error.tsx`.
+- Use Route Handlers in `app/api/**/route.ts` with explicit HTTP methods (`GET`, `POST`, `DELETE`, `OPTIONS`).
+- Optimize images using `next/image` with proper width, height, and alt attributes.
+- Use `next/font` for web font loading.
+- Enable dynamic imports (`next/dynamic`) for heavy client components (Mermaid, Monaco/CodeMirror, KaTeX).

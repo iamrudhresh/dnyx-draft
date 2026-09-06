@@ -1,0 +1,12 @@
+services:
+  dnyx-draft:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: dnyx-draft
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000

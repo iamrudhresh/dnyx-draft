@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://draft.dnyxgroup.com/sitemap.xml

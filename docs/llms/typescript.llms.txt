@@ -1,0 +1,5 @@
+# TypeScript Strict Guidelines
+- Enable `strict: true` in `tsconfig.json`.
+- Avoid using `any`; use `unknown` with type narrowing or generic type parameters.
+- Use Zod schemas with `z.infer<typeof Schema>` for runtime-validated data types.
+- Ensure all function parameters and return types are clearly typed.

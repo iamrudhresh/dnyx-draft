@@ -1,0 +1,4 @@
+# Shadcn UI & Radix Standards
+- Base components live in `components/ui/`.
+- Use `cn()` helper from `@/lib/utils` (clsx + tailwind-merge) for conditional classes.
+- Ensure accessible ARIA attributes and keyboard navigation for all dialogs, dropdowns, and tabs.

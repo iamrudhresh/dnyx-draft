@@ -1,0 +1,14 @@
+# Dnyx Draft
+> Local-first Markdown editor with instant live preview, LaTeX math formulas, Mermaid diagrams, and client-side privacy.
+
+## Overview
+Dnyx Draft is a web-based Markdown application designed for developers, researchers, writers, and students. It operates 100% locally in the browser with IndexedDB persistence, requiring no account, login, or cloud database.
+
+## Key Capabilities
+- Real-time GitHub-Flavored Markdown (GFM) preview
+- LaTeX mathematics with KaTeX ($...$ and $$...$$)
+- Flowcharts, sequence, and entity diagrams with Mermaid.js
+- Local document organization with folders, tabs, and tags
+- Client-side AES-256-GCM encrypted vault
+- Export to formatted PDF, standalone HTML, and raw Markdown
+- Ephemeral Share Snapshot links

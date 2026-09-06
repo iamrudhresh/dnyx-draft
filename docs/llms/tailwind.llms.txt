@@ -1,0 +1,4 @@
+# Tailwind CSS v4 Standards
+- Use `@theme` and CSS variables for theming.
+- Prefer CSS-first configuration over legacy JavaScript configuration where possible.
+- Support dark mode using `.dark` class managed by `next-themes`.
