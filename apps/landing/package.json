@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "cross-env PORTLESS_HTTPS=0 portless landing next dev",
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
