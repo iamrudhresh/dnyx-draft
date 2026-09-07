@@ -1,6 +1,6 @@
 'use client';
 
-import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
+import { Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '@/lib/db';
 import type { DocumentItem } from '@/lib/db/schema';
@@ -68,7 +68,11 @@ export function ImageViewer({ doc }: ImageViewerProps) {
         <img
           src={objectUrl}
           alt={doc.title}
-          style={{ transform: `scale(${zoom})`, transformOrigin: 'center', transition: 'transform 0.15s' }}
+          style={{
+            transform: `scale(${zoom})`,
+            transformOrigin: 'center',
+            transition: 'transform 0.15s',
+          }}
           className="max-w-none"
           onWheel={(e) => setZoom((z) => Math.max(0.1, Math.min(10, z - e.deltaY * 0.001)))}
         />

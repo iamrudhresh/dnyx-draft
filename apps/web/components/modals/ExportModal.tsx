@@ -98,7 +98,9 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onOpenChange }) 
     let renderedHTML: string;
     if (previewElement) {
       const clone = previewElement.cloneNode(true) as HTMLElement;
-      clone.querySelectorAll('script').forEach((s) => s.remove());
+      clone.querySelectorAll('script').forEach((s) => {
+        s.remove();
+      });
       for (const el of clone.querySelectorAll('*')) {
         for (const attr of [...el.attributes]) {
           if (attr.name.startsWith('on')) el.removeAttribute(attr.name);
@@ -111,9 +113,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onOpenChange }) 
 
     const bgColor = isDark ? '#090d16' : '#ffffff';
     const textColor = isDark ? '#c9d1d9' : '#24292f';
-    const hlTheme = isDark
-      ? 'github-dark.min.css'
-      : 'github.min.css';
+    const hlTheme = isDark ? 'github-dark.min.css' : 'github.min.css';
 
     const htmlTemplate = `<!DOCTYPE html>
 <html data-color-mode="${appearance}" data-dark-theme="dark" data-light-theme="light">
@@ -296,9 +296,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onOpenChange }) 
               Dark
             </button>
           </div>
-          <span className="text-[11px] text-slate-400">
-            Applies to HTML, PDF, and PNG exports
-          </span>
+          <span className="text-[11px] text-slate-400">Applies to HTML, PDF, and PNG exports</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">

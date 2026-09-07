@@ -74,9 +74,11 @@ const LARGE_DOCUMENT = Array.from({ length: 50 }, (_, section) =>
 const PROSE_ONLY = `
 # Long prose document without any tables
 
-${Array.from({ length: 100 }, (_, i) =>
-  `Paragraph ${i + 1}: The quick brown fox jumps over the lazy dog. ` +
-  'This sentence is repeated to generate sufficient text volume for benchmarking.',
+${Array.from(
+  { length: 100 },
+  (_, i) =>
+    `Paragraph ${i + 1}: The quick brown fox jumps over the lazy dog. ` +
+    'This sentence is repeated to generate sufficient text volume for benchmarking.',
 ).join('\n\n')}
 `;
 
@@ -84,8 +86,9 @@ const TABLE_HEAVY = Array.from({ length: 30 }, (_, t) =>
   [
     `| Table${t + 1}Col1 | Table${t + 1}Col2 | Table${t + 1}Col3 | Table${t + 1}Col4 |`,
     '| --- | --- | --- | --- |',
-    ...Array.from({ length: 8 }, (_, r) =>
-      `| Row${r + 1}Data${t + 1} | ${r * 100} | some-value-${r} | status-${r % 3} |`,
+    ...Array.from(
+      { length: 8 },
+      (_, r) => `| Row${r + 1}Data${t + 1} | ${r * 100} | some-value-${r} | status-${r % 3} |`,
     ),
     '',
   ].join('\n'),

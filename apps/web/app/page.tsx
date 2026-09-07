@@ -159,7 +159,9 @@ export default function WorkspacePage() {
               {(viewMode === 'editor' || viewMode === 'split') && (
                 <div
                   className={`h-full overflow-hidden ${
-                    viewMode === 'split' ? 'border-r border-slate-200 dark:border-slate-800' : 'w-full'
+                    viewMode === 'split'
+                      ? 'border-r border-slate-200 dark:border-slate-800'
+                      : 'w-full'
                   }`}
                   style={viewMode === 'split' ? { width: `${splitRatio}%` } : undefined}
                 >

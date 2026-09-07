@@ -3,9 +3,7 @@ export interface PdfConversionResult {
   pageCount: number;
 }
 
-export async function convertPdfToMarkdown(
-  arrayBuffer: ArrayBuffer,
-): Promise<PdfConversionResult> {
+export async function convertPdfToMarkdown(arrayBuffer: ArrayBuffer): Promise<PdfConversionResult> {
   const pdfjsLib = await import('pdfjs-dist');
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -22,8 +20,8 @@ export async function convertPdfToMarkdown(
     const page = await pdf.getPage(p);
     const textContent = await page.getTextContent();
     const pageText = (textContent.items as Array<Record<string, unknown>>)
-      .filter((item) => typeof item['str'] === 'string')
-      .map((item) => item['str'] as string)
+      .filter((item) => typeof item.str === 'string')
+      .map((item) => item.str as string)
       .join(' ')
       .trim();
     if (pageText) lines.push(pageText, '');

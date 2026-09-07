@@ -127,7 +127,14 @@ const CodeBlock = ({
 
 export const MarkdownPreview = forwardRef<HTMLDivElement, MarkdownPreviewProps>(
   ({ content, onScroll, findQuery }, ref) => {
-    const { documents, activeDocumentId, setActiveDocument, createDocument, previewScrollPositions, setPreviewScrollPosition } = useWorkspaceStore();
+    const {
+      documents,
+      activeDocumentId,
+      setActiveDocument,
+      createDocument,
+      previewScrollPositions,
+      setPreviewScrollPosition,
+    } = useWorkspaceStore();
     const { previewTheme, setPreviewTheme, textDirection } = useSettingsStore();
     const [scrollProgress, setScrollProgress] = useState(0);
     const [themePanelOpen, setThemePanelOpen] = useState(false);

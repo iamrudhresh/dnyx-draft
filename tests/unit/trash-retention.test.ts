@@ -76,7 +76,7 @@ describe('Auto-expire batch filter', () => {
     const docs = [
       { id: '1', isTrash: true, trashedAt: now - 31 * MS_PER_DAY }, // expired
       { id: '2', isTrash: true, trashedAt: now - 20 * MS_PER_DAY }, // still valid
-      { id: '3', isTrash: true, trashedAt: undefined },              // no timestamp → skip
+      { id: '3', isTrash: true, trashedAt: undefined }, // no timestamp → skip
       { id: '4', isTrash: false, trashedAt: now - 31 * MS_PER_DAY }, // not in trash
     ];
 

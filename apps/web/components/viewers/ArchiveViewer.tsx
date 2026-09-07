@@ -1,6 +1,6 @@
 'use client';
 
-import { Folder, File, ChevronRight, ChevronDown } from 'lucide-react';
+import { ChevronDown, ChevronRight, File, Folder } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/db';
 import type { DocumentItem } from '@/lib/db/schema';
@@ -93,7 +93,13 @@ function FileTree({
             <File className="h-4 w-4 text-slate-400 shrink-0" />
           </>
         )}
-        <span className={node.isDir ? 'font-medium text-slate-700 dark:text-slate-300' : 'text-slate-600 dark:text-slate-400'}>
+        <span
+          className={
+            node.isDir
+              ? 'font-medium text-slate-700 dark:text-slate-300'
+              : 'text-slate-600 dark:text-slate-400'
+          }
+        >
           {node.name}
         </span>
         {node.entry && !node.isDir && (
@@ -102,11 +108,13 @@ function FileTree({
           </span>
         )}
       </div>
-      {node.isDir && expanded && Object.values(node.children)
-        .sort((a, b) => Number(b.isDir) - Number(a.isDir) || a.name.localeCompare(b.name))
-        .map((child) => (
-          <FileTree key={child.name} node={child} depth={depth + 1} onOpenEntry={onOpenEntry} />
-        ))}
+      {node.isDir &&
+        expanded &&
+        Object.values(node.children)
+          .sort((a, b) => Number(b.isDir) - Number(a.isDir) || a.name.localeCompare(b.name))
+          .map((child) => (
+            <FileTree key={child.name} node={child} depth={depth + 1} onOpenEntry={onOpenEntry} />
+          ))}
     </div>
   );
 }
@@ -136,7 +144,12 @@ export function ArchiveViewer({ doc }: ArchiveViewerProps) {
 
       const entries: ArchiveEntry[] = [];
       zip.forEach((path, entry) => {
-        entries.push({ path, name: path.split('/').pop() ?? path, size: 0, isDirectory: entry.dir });
+        entries.push({
+          path,
+          name: path.split('/').pop() ?? path,
+          size: 0,
+          isDirectory: entry.dir,
+        });
       });
       setTree(buildTree(entries));
     }
@@ -147,7 +160,9 @@ export function ArchiveViewer({ doc }: ArchiveViewerProps) {
     if (!zipRef) return;
     setOpening(path);
     try {
-      const zip = zipRef as { file: (p: string) => { async: (t: string) => Promise<ArrayBuffer> } | null };
+      const zip = zipRef as {
+        file: (p: string) => { async: (t: string) => Promise<ArrayBuffer> } | null;
+      };
       const fileObj = zip.file(path);
       if (!fileObj) return;
       const buf = await fileObj.async('arraybuffer');

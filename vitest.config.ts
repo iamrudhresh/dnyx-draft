@@ -5,9 +5,11 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    // Picks up unit, integration, and E2E-lite test files.
+    // Picks up unit and integration test files. `tests/e2e/**` uses the
+    // Playwright test runner (`pnpm test:e2e`), not Vitest.
     // Benchmark files (.bench.ts) are run separately via `pnpm bench`.
     include: ['tests/**/*.test.ts', 'tests/**/*.spec.ts'],
+    exclude: ['tests/e2e/**', 'node_modules/**'],
     benchmark: {
       include: ['tests/**/*.bench.ts'],
     },

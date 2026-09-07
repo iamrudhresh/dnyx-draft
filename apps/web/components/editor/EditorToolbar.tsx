@@ -36,7 +36,7 @@ import {
   Type,
 } from 'lucide-react';
 import type React from 'react';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
@@ -168,8 +168,16 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     if (key.startsWith('sk-ant-')) {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-        body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 2048, messages: [{ role: 'user', content: prompt }] }),
+        headers: {
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 2048,
+          messages: [{ role: 'user', content: prompt }],
+        }),
       });
       const data = await res.json();
       return data?.content?.[0]?.text ?? '';
@@ -177,7 +185,11 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ model: 'gpt-4o-mini', max_tokens: 2048, messages: [{ role: 'user', content: prompt }] }),
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        max_tokens: 2048,
+        messages: [{ role: 'user', content: prompt }],
+      }),
     });
     const data = await res.json();
     return data?.choices?.[0]?.message?.content ?? '';
@@ -188,8 +200,13 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
       toast.error('Open Settings → AI and unlock with your passphrase first.');
       return null;
     }
-    const key = await loadApiKey('anthropic').catch(() => null) ?? await loadApiKey('openai').catch(() => null);
-    if (!key) { toast.error('No AI key stored. Open Settings → AI to save one.'); return null; }
+    const key =
+      (await loadApiKey('anthropic').catch(() => null)) ??
+      (await loadApiKey('openai').catch(() => null));
+    if (!key) {
+      toast.error('No AI key stored. Open Settings → AI to save one.');
+      return null;
+    }
     return key;
   };
 
@@ -200,17 +217,21 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     setAiLoading(true);
     try {
       // Use selected text if available, otherwise fall back to full document
-      const input = (selectedText && selectedText.trim().length > 0)
-        ? selectedText.trim()
-        : activeDoc.content.slice(0, 8000);
+      const input =
+        selectedText && selectedText.trim().length > 0
+          ? selectedText.trim()
+          : activeDoc.content.slice(0, 8000);
       const isSelection = !!(selectedText && selectedText.trim().length > 0);
       const prompts: Record<typeof action, string> = {
-        'summarize': `Summarize the following markdown in 3-5 bullet points. Output only markdown:\n\n${input}`,
+        summarize: `Summarize the following markdown in 3-5 bullet points. Output only markdown:\n\n${input}`,
         'fix-grammar': `Fix grammar and spelling in the following markdown. Preserve all formatting. Output only the corrected markdown:\n\n${input}`,
-        'concise': `Make the following markdown more concise. Preserve structure. Output only markdown:\n\n${input}`,
+        concise: `Make the following markdown more concise. Preserve structure. Output only markdown:\n\n${input}`,
       };
       const result = await callAi(prompts[action], key);
-      if (!result) { toast.error('AI returned empty response'); return; }
+      if (!result) {
+        toast.error('AI returned empty response');
+        return;
+      }
       if (isSelection) {
         onInsert(result, '');
         toast.success(`Selection updated by AI (${action})`);
@@ -226,7 +247,10 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
   };
 
   const handleAiDiagram = async () => {
-    if (!diagramDescription.trim()) { toast.error('Please describe the diagram first.'); return; }
+    if (!diagramDescription.trim()) {
+      toast.error('Please describe the diagram first.');
+      return;
+    }
     const key = await getAiKey();
     if (!key) return;
     setAiLoading(true);
@@ -234,7 +258,10 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     try {
       const prompt = `Generate a Mermaid diagram for the following description. Output ONLY a fenced mermaid code block, nothing else:\n\n${diagramDescription.trim()}`;
       const result = await callAi(prompt, key);
-      if (!result) { toast.error('AI returned empty response'); return; }
+      if (!result) {
+        toast.error('AI returned empty response');
+        return;
+      }
       onInsert('\n\n' + result + '\n\n', '');
       setDiagramDescription('');
       toast.success('Diagram inserted');
@@ -728,26 +755,39 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
                   className="h-7 w-7 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/60"
                   title={selectedText ? 'AI Actions — acts on selected text' : 'AI Actions (BYOK)'}
                 >
-                  {aiLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Bot className="h-3.5 w-3.5" />}
+                  {aiLoading ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <Bot className="h-3.5 w-3.5" />
+                  )}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel className="text-[10px] text-slate-400">
                   {selectedText ? 'AI — acts on selection' : 'AI — acts on document'}
                 </DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => handleAiAction('summarize')}>Summarize</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleAiAction('fix-grammar')}>Fix grammar &amp; spelling</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleAiAction('concise')}>Make more concise</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setDiagramPromptOpen(true)}>Generate diagram…</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleAiAction('summarize')}>
+                  Summarize
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleAiAction('fix-grammar')}>
+                  Fix grammar &amp; spelling
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleAiAction('concise')}>
+                  Make more concise
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setDiagramPromptOpen(true)}>
+                  Generate diagram…
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             {/* Diagram description inline dialog */}
             {diagramPromptOpen && (
               <div className="absolute right-0 top-8 z-50 w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl p-3 space-y-2">
-                <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Describe the diagram</p>
+                <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Describe the diagram
+                </p>
                 <textarea
-                  autoFocus
                   rows={3}
                   value={diagramDescription}
                   onChange={(e) => setDiagramDescription(e.target.value)}
@@ -765,7 +805,10 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
                   </button>
                   <button
                     type="button"
-                    onClick={() => { setDiagramPromptOpen(false); setDiagramDescription(''); }}
+                    onClick={() => {
+                      setDiagramPromptOpen(false);
+                      setDiagramDescription('');
+                    }}
                     className="px-3 py-1 text-xs rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                   >
                     Cancel

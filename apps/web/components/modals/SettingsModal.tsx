@@ -1,12 +1,25 @@
 'use client';
 
-import { Bot, Check, Eye, EyeOff, Globe, Loader2, Monitor, Moon, Palette, Settings, Sun, Target, Trash2 } from 'lucide-react';
+import {
+  Bot,
+  Check,
+  Eye,
+  EyeOff,
+  Globe,
+  Loader2,
+  Monitor,
+  Moon,
+  Palette,
+  Settings,
+  Sun,
+  Target,
+  Trash2,
+} from 'lucide-react';
 import { useTheme } from 'next-themes';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { deleteApiKey, hasStoredKey, loadApiKey, saveApiKey, setSessionPassphrase, testApiKey } from '@/lib/ai/key-store';
 import {
   Dialog,
   DialogContent,
@@ -15,6 +28,14 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
+import {
+  deleteApiKey,
+  hasStoredKey,
+  loadApiKey,
+  saveApiKey,
+  setSessionPassphrase,
+  testApiKey,
+} from '@/lib/ai/key-store';
 import {
   type AppLanguage,
   type PreviewTheme,
@@ -69,8 +90,14 @@ function AiSection() {
   }, [provider]);
 
   const handleSave = async () => {
-    if (!passphrase) { toast.error('Passphrase required'); return; }
-    if (!apiKey) { toast.error('API key required'); return; }
+    if (!passphrase) {
+      toast.error('Passphrase required');
+      return;
+    }
+    if (!apiKey) {
+      toast.error('API key required');
+      return;
+    }
     setSaving(true);
     try {
       setSessionPassphrase(passphrase);
@@ -86,12 +113,18 @@ function AiSection() {
   };
 
   const handleTest = async () => {
-    if (!passphrase) { toast.error('Enter your passphrase first'); return; }
+    if (!passphrase) {
+      toast.error('Enter your passphrase first');
+      return;
+    }
     setTesting(true);
     try {
       setSessionPassphrase(passphrase);
-      const key = apiKey || await loadApiKey(provider);
-      if (!key) { toast.error('No key found — save a key first'); return; }
+      const key = apiKey || (await loadApiKey(provider));
+      if (!key) {
+        toast.error('No key found — save a key first');
+        return;
+      }
       const ok = await testApiKey(provider, key);
       if (ok) toast.success('Connection successful');
       else toast.error('Connection failed — check your key');
@@ -114,7 +147,8 @@ function AiSection() {
         <Bot className="h-3.5 w-3.5 text-violet-500" /> AI Assistant (BYOK)
       </label>
       <p className="text-[10px] text-slate-400 -mt-2">
-        Keys are encrypted with AES-256 and stored locally. Your passphrase never leaves your device.
+        Keys are encrypted with AES-256 and stored locally. Your passphrase never leaves your
+        device.
       </p>
 
       {/* Provider */}
@@ -171,14 +205,26 @@ function AiSection() {
       </div>
 
       <div className="flex gap-2">
-        <Button type="button" size="sm" className="flex-1 bg-violet-600 hover:bg-violet-700 text-white" onClick={handleSave} disabled={saving}>
+        <Button
+          type="button"
+          size="sm"
+          className="flex-1 bg-violet-600 hover:bg-violet-700 text-white"
+          onClick={handleSave}
+          disabled={saving}
+        >
           {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : 'Save Key'}
         </Button>
         <Button type="button" size="sm" variant="outline" onClick={handleTest} disabled={testing}>
           {testing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : 'Test'}
         </Button>
         {hasKey && (
-          <Button type="button" size="sm" variant="outline" onClick={handleDelete} className="text-red-500 hover:text-red-600">
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={handleDelete}
+            className="text-red-500 hover:text-red-600"
+          >
             <Trash2 className="h-3.5 w-3.5" />
           </Button>
         )}

@@ -29,9 +29,9 @@ describe('formatMarkdownDocument — table alignment', () => {
     const out = formatMarkdownDocument(input);
     // The formatter normalises separator width to match column width.
     // A/B/C are each 1 char wide → min 3 → separators become `:--`, `:-:`, `--:`.
-    expect(out).toMatch(/:-+/);   // left-aligned marker present
-    expect(out).toMatch(/:-+:/);  // center-aligned marker present
-    expect(out).toMatch(/-+:/);   // right-aligned marker present
+    expect(out).toMatch(/:-+/); // left-aligned marker present
+    expect(out).toMatch(/:-+:/); // center-aligned marker present
+    expect(out).toMatch(/-+:/); // right-aligned marker present
   });
 
   it('does NOT reformat content inside a fenced code block', () => {
@@ -180,7 +180,8 @@ describe('calculateDocumentMetrics', () => {
 
   it('clamps Flesch score between 0 and 100', () => {
     // Dense academic text — should score low but never negative
-    const dense = 'Epistemological hermeneutics poststructuralist deconstruction phenomenological.'.repeat(5);
+    const dense =
+      'Epistemological hermeneutics poststructuralist deconstruction phenomenological.'.repeat(5);
     const m = calculateDocumentMetrics(dense);
     expect(m.fleschScore).toBeGreaterThanOrEqual(0);
     expect(m.fleschScore).toBeLessThanOrEqual(100);

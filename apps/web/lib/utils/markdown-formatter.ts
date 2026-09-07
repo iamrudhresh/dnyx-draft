@@ -45,9 +45,7 @@ function formatTableSlice(tableLines: string[]): string[] {
         .join(' | ');
       return `| ${formatted} |`;
     }
-    const formatted = colWidths
-      .map((w, i) => (row[i] ?? '').padEnd(w, ' '))
-      .join(' | ');
+    const formatted = colWidths.map((w, i) => (row[i] ?? '').padEnd(w, ' ')).join(' | ');
     return `| ${formatted} |`;
   });
 }

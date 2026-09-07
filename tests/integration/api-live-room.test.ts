@@ -1,5 +1,5 @@
-import { type NextRequest } from 'next/server';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import type { NextRequest } from 'next/server';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { DELETE, GET, PATCH, POST } from '@/app/api/live-room/route';
 
 // The live-room route uses an in-memory Map at module scope.
@@ -28,10 +28,9 @@ function makePatchReq(body: object): NextRequest {
 }
 
 function makeDeleteReq(id: string): NextRequest {
-  return new Request(
-    `http://localhost/api/live-room?id=${encodeURIComponent(id)}`,
-    { method: 'DELETE' },
-  ) as unknown as NextRequest;
+  return new Request(`http://localhost/api/live-room?id=${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  }) as unknown as NextRequest;
 }
 
 // ---------------------------------------------------------------------------
@@ -39,13 +38,15 @@ function makeDeleteReq(id: string): NextRequest {
 // ---------------------------------------------------------------------------
 describe('POST /api/live-room', () => {
   it('creates a room and returns a roomId', async () => {
-    const res = await POST(makePostReq({
-      content: '# Hello',
-      title: 'My Room',
-      hostName: 'Alice',
-      hostId: 'host-1',
-      accessMode: 'edit',
-    }));
+    const res = await POST(
+      makePostReq({
+        content: '# Hello',
+        title: 'My Room',
+        hostName: 'Alice',
+        hostId: 'host-1',
+        accessMode: 'edit',
+      }),
+    );
 
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -80,13 +81,15 @@ describe('GET /api/live-room', () => {
   let roomId: string;
 
   beforeEach(async () => {
-    const res = await POST(makePostReq({
-      content: '# Initial',
-      title: 'Test Room',
-      hostName: 'Host',
-      hostId: 'host-get',
-      accessMode: 'edit',
-    }));
+    const res = await POST(
+      makePostReq({
+        content: '# Initial',
+        title: 'Test Room',
+        hostName: 'Host',
+        hostId: 'host-get',
+        accessMode: 'edit',
+      }),
+    );
     ({ roomId } = await res.json());
   });
 
@@ -138,22 +141,26 @@ describe('PATCH /api/live-room', () => {
   let roomId: string;
 
   beforeEach(async () => {
-    const res = await POST(makePostReq({
-      content: '# Before',
-      title: 'Patch Room',
-      hostName: 'Host',
-      hostId: 'host-patch',
-      accessMode: 'edit',
-    }));
+    const res = await POST(
+      makePostReq({
+        content: '# Before',
+        title: 'Patch Room',
+        hostName: 'Host',
+        hostId: 'host-patch',
+        accessMode: 'edit',
+      }),
+    );
     ({ roomId } = await res.json());
   });
 
   it('updates content and returns { ok: true }', async () => {
-    const res = await PATCH(makePatchReq({
-      roomId,
-      content: '# After',
-      clientId: 'host-patch',
-    }));
+    const res = await PATCH(
+      makePatchReq({
+        roomId,
+        content: '# After',
+        clientId: 'host-patch',
+      }),
+    );
 
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -176,20 +183,24 @@ describe('PATCH /api/live-room', () => {
   });
 
   it('returns 404 for an unknown roomId', async () => {
-    const res = await PATCH(makePatchReq({
-      roomId: 'no-room',
-      content: '# X',
-      clientId: 'host-patch',
-    }));
+    const res = await PATCH(
+      makePatchReq({
+        roomId: 'no-room',
+        content: '# X',
+        clientId: 'host-patch',
+      }),
+    );
     expect(res.status).toBe(404);
   });
 
   it('ignores updates from unknown participants (content unchanged)', async () => {
-    await PATCH(makePatchReq({
-      roomId,
-      content: '# Unauthorized edit',
-      clientId: 'unknown-stranger',
-    }));
+    await PATCH(
+      makePatchReq({
+        roomId,
+        content: '# Unauthorized edit',
+        clientId: 'unknown-stranger',
+      }),
+    );
 
     const getRes = await GET(makeGetReq({ id: roomId, clientId: 'host-patch' }));
     const room = await getRes.json();
@@ -202,10 +213,12 @@ describe('PATCH /api/live-room', () => {
 // ---------------------------------------------------------------------------
 describe('DELETE /api/live-room', () => {
   it('deletes the room and subsequent GET returns 404', async () => {
-    const createRes = await POST(makePostReq({
-      content: '# To delete',
-      hostId: 'host-del',
-    }));
+    const createRes = await POST(
+      makePostReq({
+        content: '# To delete',
+        hostId: 'host-del',
+      }),
+    );
     const { roomId } = await createRes.json();
 
     const delRes = await DELETE(makeDeleteReq(roomId));
@@ -229,13 +242,15 @@ describe('DELETE /api/live-room', () => {
 describe('Live-room full round-trip', () => {
   it('completes a host-creates, viewer-joins, host-edits, viewer-sees flow', async () => {
     // 1. Host creates room
-    const createRes = await POST(makePostReq({
-      content: '# Draft',
-      title: 'Collaboration',
-      hostName: 'Alice',
-      hostId: 'alice',
-      accessMode: 'edit',
-    }));
+    const createRes = await POST(
+      makePostReq({
+        content: '# Draft',
+        title: 'Collaboration',
+        hostName: 'Alice',
+        hostId: 'alice',
+        accessMode: 'edit',
+      }),
+    );
     const { roomId } = await createRes.json();
 
     // 2. Viewer joins

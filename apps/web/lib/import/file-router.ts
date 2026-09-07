@@ -10,10 +10,43 @@ export interface RoutedFile {
 }
 
 const CODE_EXTENSIONS = new Set([
-  'js', 'ts', 'jsx', 'tsx', 'py', 'rb', 'go', 'rs', 'java', 'cpp', 'c',
-  'cs', 'php', 'swift', 'kt', 'sh', 'bash', 'zsh', 'fish', 'ps1',
-  'css', 'scss', 'sass', 'less', 'sql', 'graphql', 'vue', 'svelte',
-  'r', 'lua', 'dart', 'elixir', 'ex', 'exs', 'clj', 'hs', 'ml',
+  'js',
+  'ts',
+  'jsx',
+  'tsx',
+  'py',
+  'rb',
+  'go',
+  'rs',
+  'java',
+  'cpp',
+  'c',
+  'cs',
+  'php',
+  'swift',
+  'kt',
+  'sh',
+  'bash',
+  'zsh',
+  'fish',
+  'ps1',
+  'css',
+  'scss',
+  'sass',
+  'less',
+  'sql',
+  'graphql',
+  'vue',
+  'svelte',
+  'r',
+  'lua',
+  'dart',
+  'elixir',
+  'ex',
+  'exs',
+  'clj',
+  'hs',
+  'ml',
 ]);
 
 const IMAGE_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'ico']);
@@ -67,7 +100,9 @@ export async function routeFileImport(file: File): Promise<RoutedFile> {
       searchableText = (nb.cells ?? [])
         .map((c) => (Array.isArray(c.source) ? c.source.join('') : c.source))
         .join('\n');
-    } catch { /* leave empty */ }
+    } catch {
+      /* leave empty */
+    }
     return { title, content: raw, fileType: 'notebook', searchableText };
   }
 

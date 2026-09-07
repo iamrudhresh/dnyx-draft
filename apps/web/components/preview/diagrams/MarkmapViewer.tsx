@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { DiagramToolbar } from '../DiagramToolbar';
 
 interface MarkmapViewerProps {

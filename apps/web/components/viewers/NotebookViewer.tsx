@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronRight, ChevronDown, Copy, Check } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, Copy } from 'lucide-react';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -16,7 +16,11 @@ interface NotebookCell {
 interface NotebookOutput {
   output_type: string;
   text?: string | string[];
-  data?: { 'text/plain'?: string | string[]; 'text/html'?: string | string[]; 'image/png'?: string };
+  data?: {
+    'text/plain'?: string | string[];
+    'text/html'?: string | string[];
+    'image/png'?: string;
+  };
   traceback?: string[];
 }
 
@@ -30,19 +34,45 @@ function cellSource(cell: NotebookCell): string {
 
 function CellOutput({ output }: { output: NotebookOutput }) {
   if (output.output_type === 'stream' || output.output_type === 'display_data') {
-    const text = output.text ? (Array.isArray(output.text) ? output.text.join('') : output.text) : '';
+    const text = output.text
+      ? Array.isArray(output.text)
+        ? output.text.join('')
+        : output.text
+      : '';
     if (output.data?.['image/png']) {
-      return <img src={`data:image/png;base64,${output.data['image/png']}`} alt="output" className="max-w-full my-1" />;
+      return (
+        <img
+          src={`data:image/png;base64,${output.data['image/png']}`}
+          alt="output"
+          className="max-w-full my-1"
+        />
+      );
     }
-    if (text) return <pre className="text-xs overflow-auto p-2 bg-slate-50 dark:bg-slate-900 rounded">{text}</pre>;
+    if (text)
+      return (
+        <pre className="text-xs overflow-auto p-2 bg-slate-50 dark:bg-slate-900 rounded">
+          {text}
+        </pre>
+      );
   }
   if (output.output_type === 'execute_result') {
     const plain = output.data?.['text/plain'];
     const text = Array.isArray(plain) ? plain.join('') : plain;
     if (output.data?.['image/png']) {
-      return <img src={`data:image/png;base64,${output.data['image/png']}`} alt="output" className="max-w-full my-1" />;
+      return (
+        <img
+          src={`data:image/png;base64,${output.data['image/png']}`}
+          alt="output"
+          className="max-w-full my-1"
+        />
+      );
     }
-    if (text) return <pre className="text-xs overflow-auto p-2 bg-slate-50 dark:bg-slate-900 rounded">{text}</pre>;
+    if (text)
+      return (
+        <pre className="text-xs overflow-auto p-2 bg-slate-50 dark:bg-slate-900 rounded">
+          {text}
+        </pre>
+      );
   }
   if (output.output_type === 'error') {
     return (
@@ -83,7 +113,10 @@ function NotebookCellCard({ cell, index }: { cell: NotebookCell; index: number }
         {cell.cell_type === 'code' && (
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); handleCopy(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCopy();
+            }}
             className="ml-auto flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600"
           >
             {copied ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
@@ -122,9 +155,7 @@ export function NotebookViewer({ content }: NotebookViewerProps) {
   try {
     notebook = JSON.parse(content);
   } catch {
-    return (
-      <div className="p-6 text-red-500 text-sm">Invalid notebook format (not valid JSON)</div>
-    );
+    return <div className="p-6 text-red-500 text-sm">Invalid notebook format (not valid JSON)</div>;
   }
 
   const kernelName = notebook.metadata?.kernelspec?.display_name;

@@ -12,8 +12,6 @@ export async function convertDocxToMarkdown(
   const result = await mammoth.convertToHtml({ arrayBuffer });
   return {
     markdown: td.turndown(result.value),
-    warnings: result.messages
-      .filter((m) => m.type === 'warning')
-      .map((m) => m.message),
+    warnings: result.messages.filter((m) => m.type === 'warning').map((m) => m.message),
   };
 }

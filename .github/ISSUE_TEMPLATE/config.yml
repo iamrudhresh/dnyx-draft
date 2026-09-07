@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Troubleshooting Guide
+    url: https://github.com/dnyxtech/dnyx-draft/blob/main/docs/troubleshooting.md
+    about: Check known issues and common fixes before filing a bug.
+  - name: 🔒 Report a Security Vulnerability
+    url: https://github.com/dnyxtech/dnyx-draft/security/advisories/new
+    about: Please do not report security vulnerabilities as public issues — see SECURITY.md.
+  - name: 💬 Discussions
+    url: https://github.com/dnyxtech/dnyx-draft/discussions
+    about: Have a question or want to discuss an idea before filing an issue? Start a discussion.

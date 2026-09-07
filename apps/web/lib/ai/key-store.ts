@@ -1,6 +1,6 @@
 'use client';
 
-import { encryptData, decryptData } from '../crypto/aes';
+import { decryptData, encryptData } from '../crypto/aes';
 import { db } from '../db';
 
 export type AiProvider = 'anthropic' | 'openai';
@@ -26,7 +26,12 @@ export async function saveApiKey(provider: AiProvider, apiKey: string, passphras
   if (!db) throw new Error('Database not available');
   const encrypted = await encryptData(apiKey, passphrase);
   const id = `ai-key-${provider}`;
-  await db.tokens.put({ id, name: `ai-${provider}`, encryptedToken: encrypted, createdAt: Date.now() });
+  await db.tokens.put({
+    id,
+    name: `ai-${provider}`,
+    encryptedToken: encrypted,
+    createdAt: Date.now(),
+  });
   sessionPassphrase = passphrase;
   sessionCachedKeys[provider] = apiKey;
 }

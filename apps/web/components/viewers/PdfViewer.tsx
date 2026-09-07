@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Search, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '@/lib/db';
 import type { DocumentItem } from '@/lib/db/schema';
@@ -66,7 +66,7 @@ export function PdfViewer({ doc }: PdfViewerProps) {
       await page.render({ canvasContext: ctx, viewport }).promise;
     }
     renderPage();
-  }, [currentPage, scale, pdf]);
+  }, [currentPage, scale]);
 
   if (loading) {
     return (
@@ -130,13 +130,18 @@ export function PdfViewer({ doc }: PdfViewerProps) {
         {showSearch && (
           <div className="flex items-center gap-1">
             <input
-              autoFocus
               placeholder="Search in document…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="border border-slate-200 dark:border-slate-700 rounded px-2 py-0.5 text-xs bg-white dark:bg-slate-900 outline-none w-48"
             />
-            <button type="button" onClick={() => { setShowSearch(false); setSearchQuery(''); }}>
+            <button
+              type="button"
+              onClick={() => {
+                setShowSearch(false);
+                setSearchQuery('');
+              }}
+            >
               <X className="h-3.5 w-3.5 text-slate-400" />
             </button>
           </div>

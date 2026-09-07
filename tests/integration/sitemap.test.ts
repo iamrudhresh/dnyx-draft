@@ -3,7 +3,22 @@ import sitemap from '@/app/sitemap';
 
 const BASE_URL = 'https://draft.dnyxgroup.com';
 
-const EXPECTED_LOCALES = ['zh', 'ja', 'ko', 'fr', 'de', 'es', 'pt-BR', 'ru', 'ar', 'hi', 'bg', 'tr', 'it', 'nl'];
+const EXPECTED_LOCALES = [
+  'zh',
+  'ja',
+  'ko',
+  'fr',
+  'de',
+  'es',
+  'pt-BR',
+  'ru',
+  'ar',
+  'hi',
+  'bg',
+  'tr',
+  'it',
+  'nl',
+];
 
 describe('sitemap()', () => {
   it('returns exactly 16 entries (2 static + 14 locale alternates)', () => {

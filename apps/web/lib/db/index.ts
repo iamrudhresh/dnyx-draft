@@ -52,7 +52,7 @@ export const db: MarkdownDatabase | null =
   typeof window !== 'undefined' ? new MarkdownDatabase() : null;
 
 const OLD_DB_NAME = 'MarkdownViewerDB';
-const NEW_DB_NAME = 'DnyxDraftDB';
+const _NEW_DB_NAME = 'DnyxDraftDB';
 
 // One-time migration from the pre-rebrand database name. Copies data over
 // without deleting the old database, so nothing is lost if this runs twice

@@ -1,4 +1,4 @@
-import { routeFileImport, type RoutedFile } from './file-router';
+import { type RoutedFile, routeFileImport } from './file-router';
 
 export interface FolderImportResult {
   files: Array<RoutedFile & { originalFile: File }>;

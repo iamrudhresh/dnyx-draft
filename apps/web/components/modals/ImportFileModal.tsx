@@ -1,6 +1,6 @@
 'use client';
 
-import { Upload, X, AlertTriangle, CheckCircle, FolderOpen } from 'lucide-react';
+import { AlertTriangle, CheckCircle, FolderOpen, Upload } from 'lucide-react';
 import type React from 'react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -20,7 +20,8 @@ interface ImportFileModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ACCEPTED = '.md,.markdown,.txt,.docx,.html,.htm,.pdf,.csv,.tsv,.json,.yaml,.yml,.ipynb,.xlsx,.xls,.xml,.env,.ini,.toml,.zip,.jpg,.jpeg,.png,.gif,.webp,.svg,.js,.ts,.jsx,.tsx,.py,.rb,.go,.rs,.java,.cpp,.c,.cs,.php,.swift,.sh,.css,.sql';
+const ACCEPTED =
+  '.md,.markdown,.txt,.docx,.html,.htm,.pdf,.csv,.tsv,.json,.yaml,.yml,.ipynb,.xlsx,.xls,.xml,.env,.ini,.toml,.zip,.jpg,.jpeg,.png,.gif,.webp,.svg,.js,.ts,.jsx,.tsx,.py,.rb,.go,.rs,.java,.cpp,.c,.cs,.php,.swift,.sh,.css,.sql';
 
 export const ImportFileModal: React.FC<ImportFileModalProps> = ({ open, onOpenChange }) => {
   const { createDocument, updateDocument } = useWorkspaceStore();
@@ -105,7 +106,10 @@ export const ImportFileModal: React.FC<ImportFileModalProps> = ({ open, onOpenCh
         </DialogHeader>
 
         <div
-          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragOver(true);
+          }}
           onDragLeave={() => setIsDragOver(false)}
           onDrop={handleDrop}
           className={`mt-2 border-2 border-dashed rounded-xl p-10 text-center transition-colors ${
@@ -167,7 +171,9 @@ export const ImportFileModal: React.FC<ImportFileModalProps> = ({ open, onOpenCh
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span>Importing…</span>
-              <span>{progress.done} / {progress.total}</span>
+              <span>
+                {progress.done} / {progress.total}
+              </span>
             </div>
             <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
               <div

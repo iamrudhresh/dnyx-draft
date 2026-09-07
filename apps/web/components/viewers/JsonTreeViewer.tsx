@@ -68,34 +68,30 @@ function TreeNode({ value, label, depth = 0, editable, onChange }: TreeNodeProps
           <span className="text-slate-700 dark:text-slate-300 shrink-0">{label}:</span>
         )}
 
-        {isPrimitive && (
-          <>
-            {editable && editing ? (
-              <input
-                autoFocus
-                value={editVal}
-                onChange={(e) => setEditVal(e.target.value)}
-                onBlur={commitPrimitive}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') commitPrimitive();
-                  if (e.key === 'Escape') setEditing(false);
-                }}
-                className="bg-white dark:bg-slate-900 border border-blue-500 rounded px-1 outline-none min-w-0 flex-1"
-              />
-            ) : (
-              <span
-                className={`${typeColor} ${editable ? 'cursor-pointer hover:underline' : ''}`}
-                onClick={() => {
-                  if (!editable) return;
-                  setEditVal(String(value));
-                  setEditing(true);
-                }}
-              >
-                {typeof value === 'string' ? `"${value}"` : String(value)}
-              </span>
-            )}
-          </>
-        )}
+        {isPrimitive &&
+          (editable && editing ? (
+            <input
+              value={editVal}
+              onChange={(e) => setEditVal(e.target.value)}
+              onBlur={commitPrimitive}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') commitPrimitive();
+                if (e.key === 'Escape') setEditing(false);
+              }}
+              className="bg-white dark:bg-slate-900 border border-blue-500 rounded px-1 outline-none min-w-0 flex-1"
+            />
+          ) : (
+            <span
+              className={`${typeColor} ${editable ? 'cursor-pointer hover:underline' : ''}`}
+              onClick={() => {
+                if (!editable) return;
+                setEditVal(String(value));
+                setEditing(true);
+              }}
+            >
+              {typeof value === 'string' ? `"${value}"` : String(value)}
+            </span>
+          ))}
 
         {isObject && (
           <span className="text-slate-500 dark:text-slate-400 font-mono">

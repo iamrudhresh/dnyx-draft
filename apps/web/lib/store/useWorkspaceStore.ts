@@ -585,8 +585,8 @@ export const useWorkspaceStore = create<WorkspaceState>()(
                 const page = await pdf.getPage(p);
                 const tc = await page.getTextContent();
                 const text = (tc.items as Array<Record<string, unknown>>)
-                  .filter((i) => typeof i['str'] === 'string')
-                  .map((i) => i['str'] as string)
+                  .filter((i) => typeof i.str === 'string')
+                  .map((i) => i.str as string)
                   .join(' ');
                 if (text.trim()) pages.push(text);
               }
@@ -599,7 +599,9 @@ export const useWorkspaceStore = create<WorkspaceState>()(
                   ),
                 }));
               }
-            } catch { /* non-critical */ }
+            } catch {
+              /* non-critical */
+            }
           })();
         }
 

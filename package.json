@@ -2,6 +2,17 @@
   "name": "dnyx-draft-monorepo",
   "version": "4.0.0",
   "private": true,
+  "license": "MIT",
+  "description": "Local-first Markdown workspace with live preview, multi-format file viewing, a BYOK AI writing assistant, and zero-login IndexedDB storage.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dnyxtech/dnyx-draft.git"
+  },
+  "homepage": "https://github.com/dnyxtech/dnyx-draft#readme",
+  "bugs": {
+    "url": "https://github.com/dnyxtech/dnyx-draft/issues"
+  },
+  "author": "Dnyx Tech",
   "scripts": {
     "dev": "turbo dev --filter=web",
     "dev:landing": "turbo dev --filter=landing",
@@ -21,6 +32,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.10",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@playwright/test": "^1.49.0",
     "cross-env": "^10.1.0",
     "turbo": "^2.10.12",

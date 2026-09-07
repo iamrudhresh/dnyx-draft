@@ -61,14 +61,22 @@ export const TrashModal: React.FC<TrashModalProps> = ({ open, onOpenChange }) =>
 
   const handleRestore = async (id: string, title: string) => {
     await restoreDocument(id);
-    setSelected((prev) => { const n = new Set(prev); n.delete(id); return n; });
+    setSelected((prev) => {
+      const n = new Set(prev);
+      n.delete(id);
+      return n;
+    });
     toast.success(`"${title}" restored`);
   };
 
   const handlePermanentDelete = async (id: string, title: string) => {
     if (!confirm(`Permanently delete "${title}"? This cannot be undone.`)) return;
     await deleteDocument(id, true);
-    setSelected((prev) => { const n = new Set(prev); n.delete(id); return n; });
+    setSelected((prev) => {
+      const n = new Set(prev);
+      n.delete(id);
+      return n;
+    });
     toast.success(`"${title}" permanently deleted`);
   };
 

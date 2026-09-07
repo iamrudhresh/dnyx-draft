@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  documentSchema,
-  githubImportSchema,
-  shareSnapshotSchema,
-} from '@/lib/validations';
+import { documentSchema, githubImportSchema, shareSnapshotSchema } from '@/lib/validations';
 
 // ---------------------------------------------------------------------------
 // documentSchema
