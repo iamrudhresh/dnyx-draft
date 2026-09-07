@@ -4,19 +4,22 @@ import '../styles/globals.css';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: 'Dnyx Draft — The Modern, Local-First Markdown IDE',
+  title: 'Dnyx Draft — Local-First Markdown Workspace with BYOK AI',
   description:
-    'Ultra-fast, private Markdown editor with live preview, LaTeX math, Mermaid diagrams, AES-256 password vault, and version history.',
+    'Private, local-first Markdown editor with live preview, LaTeX math, 12+ diagram engines, a multi-format file viewer, bring-your-own-key AI writing, and real-time collaboration.',
   keywords: [
     'markdown editor',
     'live preview',
     'katex math',
     'mermaid diagrams',
+    'byok ai writing assistant',
+    'real-time collaboration',
     'aes-256 vault',
     'local first',
     'docx export',
+    'readme generator',
   ],
-  authors: [{ name: 'Dnyx Products' }],
+  authors: [{ name: 'Dnyx Tech', url: 'https://github.com/dnyxtech' }],
 };
 
 export default function RootLayout({

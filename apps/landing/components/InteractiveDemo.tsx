@@ -62,7 +62,7 @@ Inline equations work seamlessly too: $E = mc^2$ and $e^{i\\pi} + 1 = 0$.`,
   },
   {
     id: 'mermaid',
-    name: 'Mermaid Flowcharts',
+    name: 'Diagrams (12+ Engines)',
     icon: <Workflow className="h-4 w-4 text-blue-500" />,
     markdown: `\`\`\`mermaid
 flowchart TD

@@ -51,7 +51,31 @@ const FAQS: FaqItem[] = [
     category: 'Rendering',
     question: 'Which syntax formats and diagram types are supported?',
     answer:
-      'Dnyx Draft supports standard GitHub Flavored Markdown (GFM), inline and block LaTeX math formulas via KaTeX ($...$ and $$...$$), Mermaid.js diagrams and flowcharts, syntax-highlighted code blocks via highlight.js, and WikiLinks ([[Document Title]]).',
+      'Dnyx Draft supports standard GitHub Flavored Markdown (GFM), inline and block LaTeX math formulas via KaTeX ($...$ and $$...$$), 12+ diagram engines (Mermaid, Markmap, Vega-Lite, PlantUML, Graphviz/DOT, D2, WaveDrom, ERD, Pikchr, ABC notation, GeoJSON maps, and 3D STL models), syntax-highlighted code blocks, and WikiLinks ([[Document Title]]).',
+  },
+  {
+    category: 'AI',
+    question: 'How does the AI writing assistant work, and is it really private?',
+    answer:
+      'Dnyx Draft is bring-your-own-key (BYOK): you add your own Anthropic (Claude) or OpenAI API key, which is AES-GCM encrypted and stored locally, unlocked per session with a passphrase. When you use an AI action — summarize, fix grammar, rewrite, shorten, or generate a diagram — the request goes directly from your browser to the provider. Dnyx Draft has no backend in the loop and never sees your key, prompts, or documents.',
+  },
+  {
+    category: 'Collaboration',
+    question: 'How does Live Share collaboration work without an account?',
+    answer:
+      'Start a Live Share session from any document and send collaborators an invite link. You choose whether they join as a host, editor, or viewer. Content polls and syncs roughly every two seconds, so everyone sees near-real-time edits — no sign-up required on either side.',
+  },
+  {
+    category: 'Tooling',
+    question: 'What is the README Builder?',
+    answer:
+      'A dedicated wizard at /readme-builder that generates a polished, exportable README section by section — title, description, features, tech stack, install steps, folder structure, API reference, FAQ, and more. Point it at a GitHub repo (using an encrypted personal access token vault) to pull in live metadata automatically.',
+  },
+  {
+    category: 'Platform',
+    question: 'Does Dnyx Draft work offline and in other languages?',
+    answer:
+      'Yes. Dnyx Draft is a PWA with a service worker for offline caching, so you can install it as a standalone app and keep working without a connection. The interface is fully localized across 15 languages, including English, Chinese, Japanese, Korean, French, German, Spanish, Portuguese, Russian, Arabic, Hindi, Bulgarian, Turkish, Italian, and Dutch.',
   },
 ];
 

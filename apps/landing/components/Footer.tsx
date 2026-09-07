@@ -1,18 +1,10 @@
 'use client';
 
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  FileCode,
-  Globe,
-  HardDrive,
-  Lock,
-  Shield,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
 import { GithubIcon } from './icons/GithubIcon';
+import { APP_URL, README_BUILDER_URL, REPO_URL, SPONSOR_URL } from '@/lib/constants';
 
 export const Footer: React.FC = () => {
   return (
@@ -27,13 +19,14 @@ export const Footer: React.FC = () => {
                 <Sparkles className="h-4 w-4" />
               </div>
               <span className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">
-                Markdown <span className="text-blue-500">Viewer</span>
+                Dnyx <span className="text-blue-500">Draft</span>
               </span>
             </div>
 
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
-              The high-performance, local-first Markdown IDE built for software engineers, technical
-              writers, and researchers. Zero cloud lock-in, 100% privacy.
+              The local-first Markdown workspace with BYOK AI writing, live collaboration, and a
+              multi-format file viewer — built for software engineers, technical writers, and
+              researchers. Zero cloud lock-in, 100% privacy.
             </p>
 
             <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-1">
@@ -53,7 +46,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li>
                 <a
-                  href="http://localhost:3000"
+                  href={APP_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-blue-500 transition-colors flex items-center gap-1"
@@ -63,8 +56,19 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#features" className="hover:text-blue-500 transition-colors">
-                  Features Overview
+                <a
+                  href={README_BUILDER_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-blue-500 transition-colors flex items-center gap-1"
+                >
+                  <span>README Builder</span>
+                  <ArrowUpRight className="h-3 w-3 opacity-60" />
+                </a>
+              </li>
+              <li>
+                <a href="#ai" className="hover:text-blue-500 transition-colors">
+                  AI Assistant
                 </a>
               </li>
               <li>
@@ -100,7 +104,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                <span>Zero Third-Party Telemetry</span>
+                <span>BYOK AI — Direct to Provider</span>
               </li>
             </ul>
           </div>
@@ -142,6 +146,14 @@ export const Footer: React.FC = () => {
             <Link href="/terms" className="hover:underline">Terms</Link>
             <span>&bull;</span>
             <Link href="/security" className="hover:underline">Security</Link>
+            <span>&bull;</span>
+            <a href={REPO_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:underline">
+              <GithubIcon className="h-3.5 w-3.5" /> Source
+            </a>
+            <span>&bull;</span>
+            <a href={SPONSOR_URL} target="_blank" rel="noreferrer" className="hover:underline">
+              Sponsor
+            </a>
           </div>
         </div>
       </div>
