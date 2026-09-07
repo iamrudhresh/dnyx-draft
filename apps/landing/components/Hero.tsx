@@ -1,24 +1,13 @@
 'use client';
 
-import {
-  ArrowRight,
-  CheckCircle2,
-  Command,
-  FileCode,
-  HardDrive,
-  History,
-  Lock,
-  Play,
-  Shield,
-  Sparkles,
-  Zap,
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2, Play, Sparkles } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
 import { Button } from './ui/button';
+import { APP_URL } from '@/lib/constants';
 
 export const Hero: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'math' | 'diagram' | 'table'>('math');
+  const [activeTab, setActiveTab] = useState<'math' | 'diagram' | 'ai'>('math');
 
   return (
     <section className="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden">
@@ -27,37 +16,46 @@ export const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 text-center">
         {/* Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-50/80 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs font-semibold backdrop-blur-md mb-8 shadow-xs">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-50/80 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs font-semibold backdrop-blur-md mb-8 shadow-xs">
           <Sparkles className="h-3.5 w-3.5 text-blue-500" />
-          <span>Local-First • Zero Cloud Dependency • 100% Privacy</span>
+          <span>Local-First • BYOK AI • Zero Cloud Dependency</span>
           <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
           <span className="text-slate-500 dark:text-slate-400 font-normal">Next.js 16 + React 19</span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-5xl mx-auto leading-[1.08] mb-6">
-          The Ultra-Fast, Private,{' '}
+          The Private,{' '}
           <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-            VS Code-Grade
+            AI-Powered
           </span>{' '}
-          Markdown IDE.
+          Markdown Workspace.
         </h1>
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
-          Write with instant live preview, mathematical LaTeX equations, Mermaid flowcharts,
-          zero-knowledge AES-256 password vault, and version history. Everything stored locally in your browser.
+          A local-first editor with live preview, LaTeX math, 12+ diagram engines, a full multi-format
+          file viewer, bring-your-own-key AI writing, and real-time collaboration — all stored in your
+          browser. No account, no server, no lock-in.
         </p>
 
         {/* Action CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <a href="http://localhost:3000" target="_blank" rel="noreferrer">
-            <Button size="lg" variant="gradient" className="w-full sm:w-auto font-bold text-sm h-12 px-8 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30">
+          <a href={APP_URL} target="_blank" rel="noreferrer">
+            <Button
+              size="lg"
+              variant="gradient"
+              className="w-full sm:w-auto font-bold text-sm h-12 px-8 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30"
+            >
               Launch Web Editor Free <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
           </a>
           <a href="#demo">
-            <Button size="lg" variant="outline" className="w-full sm:w-auto font-medium text-sm h-12 px-6 hover:bg-slate-100 dark:hover:bg-slate-850">
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto font-medium text-sm h-12 px-6 hover:bg-slate-100 dark:hover:bg-slate-850"
+            >
               <Play className="h-4 w-4 mr-2 text-blue-500" /> See Interactive Demo
             </Button>
           </a>
@@ -71,11 +69,11 @@ export const Hero: React.FC = () => {
           </div>
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>KaTeX Math &amp; Mermaid Diagrams</span>
+            <span>BYOK AI — Keys Never Leave Your Browser</span>
           </div>
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>Word .docx &amp; ZIP Export</span>
+            <span>Live Share &amp; Real-Time Collaboration</span>
           </div>
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
@@ -93,9 +91,7 @@ export const Hero: React.FC = () => {
                 <div className="h-3 w-3 rounded-full bg-amber-400/80" />
                 <div className="h-3 w-3 rounded-full bg-emerald-400/80" />
               </div>
-              <span className="text-slate-500 font-mono text-[11px]">
-                Dnyx Draft — quantum-spec.md
-              </span>
+              <span className="text-slate-500 font-mono text-[11px]">Dnyx Draft — quantum-spec.md</span>
             </div>
 
             {/* Quick Demo Mode Switcher in Mock Window */}
@@ -124,14 +120,14 @@ export const Hero: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setActiveTab('table')}
+                onClick={() => setActiveTab('ai')}
                 className={`px-2.5 py-0.5 rounded-md transition-colors ${
-                  activeTab === 'table'
+                  activeTab === 'ai'
                     ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-semibold shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
                 }`}
               >
-                Aligned Table
+                AI Rewrite
               </button>
             </div>
           </div>
@@ -145,7 +141,9 @@ export const Hero: React.FC = () => {
                   <div className="text-blue-600 dark:text-blue-400 font-bold"># Quantum State Evolution</div>
                   <div className="text-slate-400">The Lindblad master equation for open quantum systems:</div>
                   <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-purple-600 dark:text-purple-400 font-semibold text-[11px]">
-                    {"$$\\frac{d\\rho}{dt} = -\\frac{i}{\\hbar}[H, \\rho] + \\sum_{k} \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)$$"}
+                    {
+                      '$$\\frac{d\\rho}{dt} = -\\frac{i}{\\hbar}[H, \\rho] + \\sum_{k} \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)$$'
+                    }
                   </div>
                   <div className="text-slate-500 italic text-[11px]">&gt; Stored securely in Dexie.js IndexedDB.</div>
                 </>
@@ -155,25 +153,28 @@ export const Hero: React.FC = () => {
                 <>
                   <div className="text-blue-600 dark:text-blue-400 font-bold"># Architecture Flow</div>
                   <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 font-semibold text-[11px] leading-relaxed">
-                    ```mermaid<br />
-                    flowchart LR<br />
-                    &nbsp;&nbsp;Editor[Editor Input] --&gt; Parser[KaTeX &amp; Mermaid]<br />
-                    &nbsp;&nbsp;Parser --&gt; DB[(IndexedDB)]<br />
-                    &nbsp;&nbsp;DB --&gt; Vault[AES-256 Vault]<br />
+                    ```mermaid
+                    <br />
+                    flowchart LR
+                    <br />
+                    &nbsp;&nbsp;Editor[Editor Input] --&gt; Parser[12+ Diagram Engines]
+                    <br />
+                    &nbsp;&nbsp;Parser --&gt; DB[(IndexedDB)]
+                    <br />
+                    &nbsp;&nbsp;DB --&gt; Vault[AES-256 Vault]
+                    <br />
                     ```
                   </div>
                 </>
               )}
 
-              {activeTab === 'table' && (
+              {activeTab === 'ai' && (
                 <>
-                  <div className="text-blue-600 dark:text-blue-400 font-bold"># Product Directory</div>
-                  <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-[11px] font-mono leading-relaxed whitespace-pre">
-{`| Feature       | Status     | Engine     |
-| :---          | :---:      | :---:      |
-| Offline Save  | Supported  | IndexedDB  |
-| LaTeX Math    | Supported  | KaTeX      |
-| AES-256 Vault | Supported  | WebCrypto  |`}
+                  <div className="text-blue-600 dark:text-blue-400 font-bold"># Release Notes (draft)</div>
+                  <div className="text-slate-400">fixd the bug where users cant export</div>
+                  <div className="text-slate-400">their doc as word file its really annoying</div>
+                  <div className="p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 font-semibold text-[11px] border border-dashed border-purple-300 dark:border-purple-800">
+                    &gt; Selection sent to your own Anthropic / OpenAI key — “Fix grammar”
                   </div>
                 </>
               )}
@@ -190,7 +191,7 @@ export const Hero: React.FC = () => {
                     The Lindblad master equation for open quantum systems:
                   </p>
                   <div className="p-3 rounded-lg bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200/50 dark:border-blue-900/40 text-center font-serif text-sm text-blue-700 dark:text-blue-300 font-semibold shadow-xs">
-                    {"dρ/dt = -(i/ℏ)[H, ρ] + 𝒟[ρ]"}
+                    {'dρ/dt = -(i/ℏ)[H, ρ] + 𝒟[ρ]'}
                   </div>
                 </>
               )}
@@ -210,33 +211,18 @@ export const Hero: React.FC = () => {
                 </>
               )}
 
-              {activeTab === 'table' && (
+              {activeTab === 'ai' && (
                 <>
                   <h2 className="text-base font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-1">
-                    Product Directory
+                    Release Notes (draft)
                   </h2>
-                  <div className="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg text-xs">
-                    <table className="w-full text-left">
-                      <thead className="bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 font-semibold">
-                        <tr>
-                          <th className="p-2">Feature</th>
-                          <th className="p-2 text-center">Status</th>
-                          <th className="p-2 text-center">Engine</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                        <tr className="bg-blue-50/40 dark:bg-blue-950/20 font-medium">
-                          <td className="p-2 text-blue-600 dark:text-blue-400 font-semibold">Offline Save</td>
-                          <td className="p-2 text-center text-emerald-600 font-semibold">Supported</td>
-                          <td className="p-2 text-center text-slate-600 dark:text-slate-400">IndexedDB</td>
-                        </tr>
-                        <tr>
-                          <td className="p-2">LaTeX Math</td>
-                          <td className="p-2 text-center text-emerald-600 font-semibold">Supported</td>
-                          <td className="p-2 text-center text-slate-600 dark:text-slate-400">KaTeX</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <p className="text-slate-700 dark:text-slate-200 text-xs leading-relaxed">
+                    Fixed the bug where users couldn&apos;t export their document as a Word file — it was
+                    really annoying.
+                  </p>
+                  <div className="flex items-center gap-1.5 text-[11px] text-purple-600 dark:text-purple-400 font-semibold">
+                    <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                    <span>Rewritten with your own API key — nothing sent to Dnyx servers</span>
                   </div>
                 </>
               )}
@@ -247,13 +233,22 @@ export const Hero: React.FC = () => {
           <div className="flex flex-wrap items-center justify-between px-4 py-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-[11px] text-slate-500 select-none">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Ctrl+P</kbd> Command Palette
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  Ctrl+K
+                </kbd>{' '}
+                Command Palette
               </span>
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Alt+H</kbd> Version Diff
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  Alt+H
+                </kbd>{' '}
+                Version Diff
               </span>
-              <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">F2</kbd> Rename
+              <span className="hidden sm:flex items-center gap-1">
+                <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">
+                  Ctrl+F
+                </kbd>{' '}
+                Find &amp; Replace
               </span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">

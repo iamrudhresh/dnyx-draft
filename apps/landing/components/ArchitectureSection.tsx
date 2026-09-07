@@ -1,6 +1,6 @@
 'use client';
 
-import { Cpu, Database, Eye, Lock, ServerOff, ShieldCheck } from 'lucide-react';
+import { Database, KeyRound, ServerOff, ShieldCheck } from 'lucide-react';
 import type React from 'react';
 
 export const ArchitectureSection: React.FC = () => {
@@ -16,14 +16,14 @@ export const ArchitectureSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <div className="p-6 rounded-2xl bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-center space-y-3">
             <div className="h-12 w-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center mx-auto text-blue-600 dark:text-blue-400">
               <ServerOff className="h-6 w-6" />
             </div>
             <h3 className="font-bold text-base text-slate-900 dark:text-white">100% Client-Side Execution</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              All Markdown parsing, diagram compilation, and Word document bundling runs inside your web browser using WebAssembly and pure TypeScript.
+              All Markdown parsing, diagram compilation, and Word document bundling runs inside your web browser using pure TypeScript.
             </p>
           </div>
 
@@ -44,6 +44,16 @@ export const ArchitectureSection: React.FC = () => {
             <h3 className="font-bold text-base text-slate-900 dark:text-white">WebCrypto AES-256 Vault</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               Standardized WebCrypto PBKDF2 key derivation and AES-GCM encryption guarantee that locked notes cannot be read even from direct storage dumps.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-center space-y-3">
+            <div className="h-12 w-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center mx-auto text-amber-600 dark:text-amber-400">
+              <KeyRound className="h-6 w-6" />
+            </div>
+            <h3 className="font-bold text-base text-slate-900 dark:text-white">BYOK AI, Direct to Provider</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              AI requests go straight from your browser to Anthropic or OpenAI using your own encrypted key. Dnyx Draft&apos;s servers never see your prompts.
             </p>
           </div>
         </div>

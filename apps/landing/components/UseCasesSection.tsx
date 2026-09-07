@@ -22,12 +22,12 @@ const USE_CASES = [
     role: 'Software Engineers & Architects',
     tagline: 'Technical RFCs, API Specs & Code Documentation',
     description:
-      'Write architecture decision records with interactive Mermaid flowcharts, syntax-highlighted code blocks, and VS Code-style keyboard shortcuts.',
+      'Write architecture decision records with interactive Mermaid, Graphviz, and D2 diagrams, syntax-highlighted code blocks, and a fuzzy command palette.',
     bullets: [
-      'Interactive Mermaid.js architecture diagrams',
-      'Fuzzy Command Palette (Ctrl+P / Cmd+K)',
-      'Direct screenshot paste and image drop',
-      'Native local disk folder mounting',
+      '12+ interactive diagram engines (Mermaid, D2, Graphviz…)',
+      'AI-generated diagrams from a plain-text description',
+      'Native local disk folder mounting via File System Access',
+      'Live Share for pairing on RFCs in real time',
     ],
     badgeColor: 'bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
   },
@@ -50,12 +50,12 @@ const USE_CASES = [
     role: 'Technical Writers & Content Creators',
     tagline: 'Structured Documentation, Guides & Word Export',
     description:
-      'Build complex data tables with the visual table editor, convert raw CSVs into markdown grids, and export directly to Microsoft Word (.docx).',
+      'Build complex data tables with the visual table editor, convert raw CSVs into markdown grids, and generate a polished README with the guided builder.',
     bullets: [
       'Direct export to Microsoft Word (.docx)',
-      'Visual interactive Table Builder & CSV Converter',
+      'Dedicated README Builder pulling live GitHub metadata',
+      'AI-assisted summarize, rewrite & grammar fixes (BYOK)',
       'Flesch Reading Ease readability scoring',
-      'Standalone HTML export with custom stylesheets',
     ],
     badgeColor: 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
   },

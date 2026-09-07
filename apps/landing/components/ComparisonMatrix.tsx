@@ -8,7 +8,7 @@ interface ComparisonRow {
   mv: { status: 'yes' | 'partial' | 'no'; label: string };
   notion: { status: 'yes' | 'partial' | 'no'; label: string };
   obsidian: { status: 'yes' | 'partial' | 'no'; label: string };
-  dillinger: { status: 'yes' | 'partial' | 'no'; label: string };
+  typora: { status: 'yes' | 'partial' | 'no'; label: string };
 }
 
 const COMPARISONS: ComparisonRow[] = [
@@ -17,56 +17,63 @@ const COMPARISONS: ComparisonRow[] = [
     mv: { status: 'yes', label: '100% Offline (IndexedDB)' },
     notion: { status: 'no', label: 'Cloud-Required' },
     obsidian: { status: 'yes', label: 'Local Files' },
-    dillinger: { status: 'partial', label: 'Memory Only' },
+    typora: { status: 'yes', label: 'Local Files' },
   },
   {
-    feature: 'LaTeX Mathematical Formulas',
-    mv: { status: 'yes', label: 'KaTeX (Inline & Block)' },
-    notion: { status: 'partial', label: 'Basic Math' },
-    obsidian: { status: 'yes', label: 'MathJax' },
-    dillinger: { status: 'no', label: 'Not Supported' },
+    feature: 'Runs in the Browser (No Install)',
+    mv: { status: 'yes', label: 'Zero-Install Web App' },
+    notion: { status: 'yes', label: 'Web + Desktop' },
+    obsidian: { status: 'no', label: 'Desktop App Only' },
+    typora: { status: 'no', label: 'Desktop App Only' },
   },
   {
-    feature: 'Mermaid Flowcharts & Diagrams',
-    mv: { status: 'yes', label: 'Full Interactive SVG' },
+    feature: 'BYOK AI Writing Assistant',
+    mv: { status: 'yes', label: 'Your Own Anthropic/OpenAI Key' },
+    notion: { status: 'partial', label: 'Notion AI Add-on ($)' },
+    obsidian: { status: 'partial', label: 'Via Plugin' },
+    typora: { status: 'no', label: 'Not Supported' },
+  },
+  {
+    feature: 'Real-Time Collaboration',
+    mv: { status: 'yes', label: 'Live Share, No Account' },
     notion: { status: 'yes', label: 'Supported' },
-    obsidian: { status: 'yes', label: 'Supported' },
-    dillinger: { status: 'no', label: 'Not Supported' },
+    obsidian: { status: 'partial', label: 'Paid Sync Plugin' },
+    typora: { status: 'no', label: 'Not Supported' },
+  },
+  {
+    feature: 'Multi-Format File Viewer',
+    mv: { status: 'yes', label: 'CSV, JSON, XLSX, PDF, Jupyter…' },
+    notion: { status: 'partial', label: 'Embeds Only' },
+    obsidian: { status: 'partial', label: 'Via Plugins' },
+    typora: { status: 'no', label: 'Markdown Only' },
+  },
+  {
+    feature: '12+ Diagram Engines',
+    mv: { status: 'yes', label: 'Mermaid, D2, Graphviz, PlantUML…' },
+    notion: { status: 'partial', label: 'Mermaid Only' },
+    obsidian: { status: 'partial', label: 'Mermaid via Plugin' },
+    typora: { status: 'partial', label: 'Mermaid Only' },
   },
   {
     feature: 'Client-Side Password Encryption',
     mv: { status: 'yes', label: 'AES-256-GCM Vault' },
     notion: { status: 'no', label: 'No File Passwords' },
     obsidian: { status: 'partial', label: 'Via Plugin' },
-    dillinger: { status: 'no', label: 'No Encryption' },
+    typora: { status: 'no', label: 'No Encryption' },
   },
   {
     feature: 'Direct Word (.docx) & ZIP Export',
     mv: { status: 'yes', label: 'Instant Client-side' },
     notion: { status: 'no', label: 'HTML/PDF Only' },
     obsidian: { status: 'partial', label: 'Via Pandoc CLI' },
-    dillinger: { status: 'no', label: 'HTML/PDF Only' },
-  },
-  {
-    feature: 'VS Code Command Palette (Ctrl+P)',
-    mv: { status: 'yes', label: 'Built-in cmdk' },
-    notion: { status: 'partial', label: 'Quick Search Only' },
-    obsidian: { status: 'yes', label: 'Command Palette' },
-    dillinger: { status: 'no', label: 'None' },
-  },
-  {
-    feature: 'Browser Voice-to-Text Dictation',
-    mv: { status: 'yes', label: '100% Free Web Speech' },
-    notion: { status: 'no', label: 'None' },
-    obsidian: { status: 'no', label: 'None' },
-    dillinger: { status: 'no', label: 'None' },
+    typora: { status: 'yes', label: 'Via Pandoc' },
   },
   {
     feature: 'Account / Registration Required',
     mv: { status: 'yes', label: 'No Login (Instant)' },
     notion: { status: 'no', label: 'Mandatory Login' },
     obsidian: { status: 'yes', label: 'No Account (Free)' },
-    dillinger: { status: 'yes', label: 'No Account' },
+    typora: { status: 'yes', label: 'No Account (Paid App)' },
   },
 ];
 
@@ -120,7 +127,7 @@ export const ComparisonMatrix: React.FC = () => {
               </th>
               <th className="p-4 font-medium text-slate-500">Notion</th>
               <th className="p-4 font-medium text-slate-500">Obsidian</th>
-              <th className="p-4 font-medium text-slate-500">Dillinger</th>
+              <th className="p-4 font-medium text-slate-500">Typora</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
@@ -142,7 +149,7 @@ export const ComparisonMatrix: React.FC = () => {
                   <StatusCell data={row.obsidian} />
                 </td>
                 <td className="p-4">
-                  <StatusCell data={row.dillinger} />
+                  <StatusCell data={row.typora} />
                 </td>
               </tr>
             ))}
